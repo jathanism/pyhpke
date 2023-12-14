@@ -34,6 +34,14 @@ class AEAD(AEADInterface):
             self._nk = 0
             self._nn = 0
             self._nt = 0
+        elif aead_id == AEADId.AES256_SIV:
+            self._nk = 32
+            self._nn = 0
+            self._nt = 0
+        elif aead_id == AEADId.AES512_SIV:
+            self._nk = 64
+            self._nn = 0
+            self._nt = 0
         else:
             raise ValueError(f"Invalid aead_id: {aead_id}.")
         self._id = aead_id

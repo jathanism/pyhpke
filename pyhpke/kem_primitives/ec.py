@@ -11,6 +11,21 @@ from ..keys.ec_key import ECKey
 # from cryptography.hazmat.primitives.serialization import Encoding, PublicFormat
 
 
+class DRAFTCP256R1(ec.EllipticCurve):
+    name = "draftcp256r1"
+    key_size= 256
+
+
+class DRAFTCP384R1(ec.EllipticCurve):
+    name = "draftcp384r1"
+    key_size= 384
+
+
+class DRAFTCP521R1(ec.EllipticCurve):
+    name = "draftcp521r1"
+    key_size= 521
+
+
 class EC(KEMPrimitivesInterface):
     """
     The KEM (Key Encapsulation Mechanism) context.
@@ -30,6 +45,27 @@ class EC(KEMPrimitivesInterface):
             self._bitmask = 0xFF
             self._order = 0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC7634D81F4372DDF581A0DB248B0A77AECEC196ACCC52973
         elif kem_id == KEMId.DHKEM_P521_HKDF_SHA512:
+            self._crv = ec.SECP521R1()
+            self._nsecret = 64
+            self._nsk = 66
+            self._bitmask = 0x01
+            self._order = 0x01FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFA51868783BF2F966B7FCC0148F709A5D03BB5C9B8899C47AEBB6FB71E91386409
+        elif kem_id == KEMId.DHKEM_CP256_HKDF_SHA256:
+            # self._crv = DRAFTCP256R1()
+            self._crv = ec.SECP256R1()
+            self._nsecret = 32
+            self._nsk = 32
+            self._bitmask = 0xFF
+            self._order = 0xFFFFFFFF00000000FFFFFFFFFFFFFFFFBCE6FAADA7179E84F3B9CAC2FC632551
+        elif kem_id == KEMId.DHKEM_CP384_HKDF_SHA384:
+            # self._crv = DRAFTCP384R1()
+            self._crv = ec.SECP384R1()
+            self._nsecret = 48
+            self._nsk = 48
+            self._bitmask = 0xFF
+            self._order = 0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC7634D81F4372DDF581A0DB248B0A77AECEC196ACCC52973
+        elif kem_id == KEMId.DHKEM_CP521_HKDF_SHA512:
+            # self._crv = DRAFTCP521R1()
             self._crv = ec.SECP521R1()
             self._nsecret = 64
             self._nsk = 66

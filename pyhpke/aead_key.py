@@ -1,6 +1,7 @@
 from .aead_key_interface import AEADKeyInterface
 from .consts import AEADId
 from .keys.aes_gcm_key import AESGCMKey
+from .keys.aes_siv_key import AESSIVKey
 from .keys.chacha20_poly1305_key import ChaCha20Poly1305Key
 
 
@@ -18,6 +19,10 @@ class AEADKey:
             return AESGCMKey(data, 16)
         if aead_id == AEADId.AES256_GCM:
             return AESGCMKey(data, 32)
+        if aead_id == AEADId.AES256_SIV:
+            return AESSIVKey(data, 32)
+        if aead_id == AEADId.AES512_SIV:
+            return AESSIVKey(data, 64)
         if aead_id == AEADId.CHACHA20_POLY1305:
             return ChaCha20Poly1305Key(data)
         raise ValueError(f"Unsupported or unknown AEAD id: {aead_id}.")

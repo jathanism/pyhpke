@@ -31,6 +31,18 @@ class KEM(KEMInterface):
             kdf_id = KDFId.HKDF_SHA512
             self._nsecret = 64
             self._prim = EC(kem_id)
+        elif kem_id == KEMId.DHKEM_CP256_HKDF_SHA256:
+            kdf_id = KDFId.HKDF_SHA256
+            self._nsecret = 32
+            self._prim = EC(kem_id)
+        elif kem_id == KEMId.DHKEM_CP384_HKDF_SHA384:
+            kdf_id = KDFId.HKDF_SHA384
+            self._nsecret = 48
+            self._prim = EC(kem_id)
+        elif kem_id == KEMId.DHKEM_CP521_HKDF_SHA512:
+            kdf_id = KDFId.HKDF_SHA512
+            self._nsecret = 64
+            self._prim = EC(kem_id)
         elif kem_id == KEMId.DHKEM_X25519_HKDF_SHA256:
             kdf_id = KDFId.HKDF_SHA256
             self._nsecret = 32
